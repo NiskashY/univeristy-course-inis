@@ -144,6 +144,10 @@
             const seePageButton = document.createElement('button');
             seePageButton.textContent = 'See details';
             seePageButton.onclick = function(event) { 
+                // Сохраняем данные о майке в localStorage
+                // Перенаправляем на страницу details.html
+                localStorage.setItem("shirt", JSON.stringify(shirt));
+                window.location.href = "../lab_2/details.html";
             };
             return seePageButton;
         }
