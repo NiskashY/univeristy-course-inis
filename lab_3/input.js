@@ -68,43 +68,12 @@ function prepareDivs() {
         }
     };
 
-    const handlePinchStart = (e) => {
-        if (e.touches.length === 2) {
-            targ = e.target;
-            initialDistance = getDistance(e.touches[0], e.touches[1]);
-            initialSize = {
-                width: targ.offsetWidth,
-                height: targ.offsetHeight,
-            };
-            isResizing = true;
-            isActive = false;
-        }
-    };
-
-    const handlePinchMove = (e) => {
-        if (isResizing && e.touches.length === 2) {
-            const currentDistance = getDistance(e.touches[0], e.touches[1]);
-            const scale = currentDistance / initialDistance;
-
-            targ.style.width = `${initialSize.width * scale}px`;
-            targ.style.height = `${initialSize.height * scale}px`;
-        }
-    };
-
-    const getDistance = (touch1, touch2) => {
-        const dx = touch2.clientX - touch1.clientX;
-        const dy = touch2.clientY - touch1.clientY;
-        return Math.sqrt(dx * dx + dy * dy);
-    };
-
     for (let div of divs) {
         div.addEventListener("mousedown", startDrag);
         div.addEventListener("touchstart", startDrag);
         div.addEventListener("dblclick", handleDoubleClick);
         div.addEventListener("mouseup", stopDrag);
         div.addEventListener("touchend", stopDrag);
-        div.addEventListener("touchstart", handlePinchStart);
-        div.addEventListener("touchmove", handlePinchMove);
     }
 
     document.addEventListener("mousemove", handleMove);
